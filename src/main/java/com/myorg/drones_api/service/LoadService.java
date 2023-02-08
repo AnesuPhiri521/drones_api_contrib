@@ -87,4 +87,14 @@ public class LoadService {
 	public List<Load> getAllLoads() {
 		return loadRepo.findAll();
 	}
+	
+	public List<Load> getDroneMedicines(String droneSerial) throws LoadingExeption {
+		List<Load> loads = loadRepo.findByDroneSerialNumberAndDelivered(droneSerial, false);
+		
+		if (loads!=null) {
+			return loads;
+		}else {
+			throw new LoadingExeption("There are no any loaded medicines for the specified drone.");
+		}
+	}
 }

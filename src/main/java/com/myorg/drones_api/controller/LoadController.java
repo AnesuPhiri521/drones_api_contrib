@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,5 +34,10 @@ public class LoadController {
 	@GetMapping("/fetchall")
 	public ResponseEntity<List<Load>>getAllLoads() {
 		return new ResponseEntity<>(loadService.getAllLoads(), HttpStatus.CREATED);
+	}
+	
+	@GetMapping("/dronemedicines/{droneSerial}")
+	public ResponseEntity<List<Load>> getDroneMedicines(@PathVariable  String droneSerial) throws LoadingExeption {
+		return ResponseEntity.ok(loadService.getDroneMedicines(droneSerial));
 	}
 }
