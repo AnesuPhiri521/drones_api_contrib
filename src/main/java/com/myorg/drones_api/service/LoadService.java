@@ -55,14 +55,19 @@ public class LoadService {
 					if ((loadedWeight+medicineWeight) > selectedDrone.getWeight()) {
 						throw new LoadingExeption("The drone is now full and can not carry more items. So far loaded weight is : "+ loadedWeight + " and can not add this " + medicineWeight + " grames");
 					}else {
-						/*
-						 * EVERYTHING IS CHECKED AND SAVING CAN NOW BE DONE
-						 */
-						//Change state of drone to Loading
-						selectedDrone.setState("LOADING");
-						droneRepo.save(selectedDrone);
-						//Save new load in loads table
-						return loadRepo.save(load);
+						//Check to see if drone batrey is not less than 25%
+						if (selectedDrone.getBattreyPercent()< 25) {
+							throw new LoadingExeption("The drone battery percent is now less than 25 % please recharge it first before loading!!!");
+						}else {
+							/*
+							 * EVERYTHING IS CHECKED AND SAVING CAN NOW BE DONE
+							 */
+							//Change state of drone to Loading
+							selectedDrone.setState("LOADING");
+							droneRepo.save(selectedDrone);
+							//Save new load in loads table
+							return loadRepo.save(load);
+					    }
 					}
 					
 					
@@ -72,7 +77,7 @@ public class LoadService {
 			}else {
 				throw new LoadingExeption("Medication with code: "+medicineCode+" is not found in system.");
 			}
-		}else {
+		} else{
 			throw new LoadingExeption("Drone with serial number: "+droneSerial+" is not found in system.");
 		}
 		
