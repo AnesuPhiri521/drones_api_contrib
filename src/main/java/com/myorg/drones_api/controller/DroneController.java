@@ -51,6 +51,11 @@ public class DroneController {
 	public ResponseEntity<List<Drone>>getAvailable() {
 		return new ResponseEntity<>(droneservice.getAvailable(), HttpStatus.OK);
 	}
+	
+	@GetMapping("/checkbattrey/{serialNumber}")
+	public ResponseEntity<String> getBattreyLevel(@PathVariable  String serialNumber) throws DroneNotFoundException {
+		return ResponseEntity.ok(droneservice.getBattreyLevel(serialNumber));
+	}
 
 	
 }

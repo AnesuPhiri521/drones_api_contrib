@@ -44,4 +44,14 @@ public class DroneService {
 		return droneRepo.save(drone);
 	}
 	
+	public String getBattreyLevel(String droneSerial) throws DroneNotFoundException {
+		Drone drone = droneRepo.findBySerialNumber(droneSerial);
+		
+		if (drone!=null) {
+			return "Drone with serial id: "+ droneSerial +" battrey percent is: "+drone.getBattreyPercent();
+		}else {
+			throw new DroneNotFoundException("Drone with serila id: "+droneSerial+" is not found in system.");
+		}
+	}
+	
 }
