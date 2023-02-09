@@ -33,5 +33,30 @@ Process Flow
       "battreyPercent" : 80,
       "state" : "IDLE"
     }
- 2. 
+    
+2. Save medicines to be carried by saved drones http://localhost:8080/medication/save
+    {
+      "name":"ARV_PILLS",
+      "weight":80,
+      "code":"MED002",
+      "image":"test.jpg"
+    }
+    
+3.  Load drone http://localhost:8080/load/save
+      {
+        "droneSerialNumber" : "DR1002",
+        "medicineCode" : "MED002"
+      }
+      
+4.  Change state to LOADED http://localhost:8080/drones/savestate
+      {
+        "serialNumber" : "DR1002",
+        "state" : "LOADED"
+      }
+      
+5.  Change state to LOADED http://localhost:8080/drones/savestate
+      {
+        "serialNumber" : "DR1002",
+        "state" : "LOADED"
+      }
     
