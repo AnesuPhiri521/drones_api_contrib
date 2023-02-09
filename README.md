@@ -25,7 +25,7 @@ Assumptions:
 - Once the drone state changes to DELIVERED all the delivered loads will change their delivered state from false to true
 
 Process Flow
-1.  Save drones in system first http://localhost:8080/drones/save
+1.  Save drones in system first http://localhost:8080/drones/save POST
     {
       "serialNumber" : "DR1002",
       "model" : "Lightweight",
@@ -34,7 +34,7 @@ Process Flow
       "state" : "IDLE"
     }
     
-2. Save medicines to be carried by saved drones http://localhost:8080/medication/save
+2. Save medicines to be carried by saved drones http://localhost:8080/medication/save POST
     {
       "name":"ARV_PILLS",
       "weight":80,
@@ -42,45 +42,55 @@ Process Flow
       "image":"test.jpg"
     }
     
-3.  Load drone http://localhost:8080/load/save
+3.  Load drone http://localhost:8080/load/save POST
       {
         "droneSerialNumber" : "DR1002",
         "medicineCode" : "MED002"
       }
       
-4.  Change state to LOADED http://localhost:8080/drones/savestate
+4.  Change state to LOADED http://localhost:8080/drones/savestate PUT
       {
         "serialNumber" : "DR1002",
         "state" : "LOADED"
       }
       
-5.  Change state to LOADED http://localhost:8080/drones/savestate
+5.  Change state to LOADED http://localhost:8080/drones/savestate PUT
       {
         "serialNumber" : "DR1002",
         "state" : "LOADED"
       }
       
-6.  Change state to DELIVERING http://localhost:8080/drones/savestate
+6.  Change state to DELIVERING http://localhost:8080/drones/savestate PUT
       {
         "serialNumber" : "DR1002",
         "state" : "DELIVERING"
       }
       
-7.  Change state to DELIVERED http://localhost:8080/drones/savestate
+7.  Change state to DELIVERED http://localhost:8080/drones/savestate PUT
       {
         "serialNumber" : "DR1002",
         "state" : "DELIVERED"
       }
       
-8.  Change state to RETURNING http://localhost:8080/drones/savestate
+8.  Change state to RETURNING http://localhost:8080/drones/savestate PUT
       {
         "serialNumber" : "DR1002",
         "state" : "RETURNING"
       }
       
-9.  Change state to IDLE http://localhost:8080/drones/savestate
+9.  Change state to IDLE http://localhost:8080/drones/savestate PUT
       {
         "serialNumber" : "DR1002",
         "state" : "IDLE"
       }
+      
+Extra tasks:
+- checking loaded medication items for a given drone 
+  http://localhost:8080/load/dronemedicines/DR1002 GET
+  
+- checking available drones for loading
+  http://localhost:8080/drones/fetchavailable GET
+  
+- check drone battery level for a given drone
+  http://localhost:8080/drones/checkbattrey/DR1001 GET
     
