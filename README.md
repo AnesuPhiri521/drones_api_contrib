@@ -59,4 +59,28 @@ Process Flow
         "serialNumber" : "DR1002",
         "state" : "LOADED"
       }
+      
+6.  Change state to DELIVERING http://localhost:8080/drones/savestate
+      {
+        "serialNumber" : "DR1002",
+        "state" : "DELIVERING"
+      }
+      
+7.  Change state to DELIVERED http://localhost:8080/drones/savestate
+      {
+        "serialNumber" : "DR1002",
+        "state" : "DELIVERED"
+      }
+      
+8.  Change state to RETURNING http://localhost:8080/drones/savestate
+      {
+        "serialNumber" : "DR1002",
+        "state" : "RETURNING"
+      }
+      
+9.  Change state to IDLE http://localhost:8080/drones/savestate
+      {
+        "serialNumber" : "DR1002",
+        "state" : "IDLE"
+      }
     
