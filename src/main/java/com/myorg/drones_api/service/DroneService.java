@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.myorg.drones_api.dto.DroneStateRequest;
 import com.myorg.drones_api.dto.DronesRequest;
 import com.myorg.drones_api.entity.Drone;
+import com.myorg.drones_api.entity.Load;
 import com.myorg.drones_api.execption.DroneNotFoundException;
 import com.myorg.drones_api.repository.DroneRepository;
 import com.myorg.drones_api.repository.LoadRepository;
@@ -103,6 +104,13 @@ public class DroneService {
 			}else if(droneRequest.getState().equals("DELIVERED")) {
                 if (drone.getState().equals("DELIVERING")) {
                 	drone.setState("DELIVERED");
+                	List<Load> loads = loadRepo.findByDroneSerialNumberAndDelivered(droneRequest.getSerialNumber(),false);
+                	//Change state of all drugs to delivered
+                	loads.forEach((ld) -> {
+                        ld.setDelivered(true);
+                        loadRepo.save(ld);
+                    });
+                    
 					return droneRepo.save(drone);
 				}else if (drone.getState().equals("DELIVERED")) {
 					throw new DroneNotFoundException("Drone state is already on "+droneRequest.getState()+" state");

@@ -15,4 +15,5 @@ public interface LoadRepository extends JpaRepository<Load, Integer> {
 	@Transactional
 	@Modifying
 	void deleteByDroneSerialNumberAndDelivered(String field1, Boolean field2);
+	
 }
