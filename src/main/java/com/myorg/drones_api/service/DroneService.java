@@ -3,13 +3,16 @@ package com.myorg.drones_api.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.myorg.drones_api.dto.DroneStateRequest;
 import com.myorg.drones_api.dto.DronesRequest;
 import com.myorg.drones_api.entity.Drone;
+import com.myorg.drones_api.entity.DronesBattrey;
 import com.myorg.drones_api.entity.Load;
 import com.myorg.drones_api.execption.DroneNotFoundException;
+import com.myorg.drones_api.repository.BatreyRepository;
 import com.myorg.drones_api.repository.DroneRepository;
 import com.myorg.drones_api.repository.LoadRepository;
 
@@ -21,6 +24,9 @@ public class DroneService {
 	
 	@Autowired
 	private LoadRepository loadRepo;
+	
+	@Autowired
+	private BatreyRepository batreyRepo;
 	
 	public Drone saveDrone(DronesRequest droneRequest) {
 		Drone drone = new Drone(0,droneRequest.getSerialNumber(),droneRequest.getModel(),droneRequest.getWeight(),droneRequest.getBattreyPercent(),droneRequest.getState() );
@@ -142,6 +148,24 @@ public class DroneService {
 		}else {
 			throw new DroneNotFoundException("Drone with serila number: "+droneRequest.getSerialNumber()+" is not found in system.");
 		}
+	}
+	
+	@Scheduled(fixedRate = 5000)
+	public void checkBattreyLevels() {
+		List<Drone> drones = droneRepo.findAll();
+		
+    	//Change state of all drugs to delivered
+		drones.forEach((dr) -> {
+            
+            DronesBattrey droneBatrey = new DronesBattrey();
+            droneBatrey.setSerialNumber(dr.getSerialNumber());
+            droneBatrey.setBattreyPercent(dr.getBattreyPercent());
+            batreyRepo.save(droneBatrey);
+        });
+	}
+	
+	public List<DronesBattrey> getAllBattrey() {
+		return batreyRepo.findAll();
 	}
 	
 }

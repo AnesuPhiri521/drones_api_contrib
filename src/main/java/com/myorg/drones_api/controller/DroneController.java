@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.myorg.drones_api.dto.DroneStateRequest;
 import com.myorg.drones_api.dto.DronesRequest;
 import com.myorg.drones_api.entity.Drone;
+import com.myorg.drones_api.entity.DronesBattrey;
 import com.myorg.drones_api.execption.DroneNotFoundException;
 import com.myorg.drones_api.service.DroneService;
 
@@ -61,6 +62,11 @@ public class DroneController {
 	@PutMapping("/savestate")
 	public ResponseEntity<Drone>saveState(@RequestBody @Valid DroneStateRequest droneRequest) throws DroneNotFoundException {
 		return new ResponseEntity<>(droneservice.saveState(droneRequest), HttpStatus.OK);
+	}
+	
+	@GetMapping("/fetchbattrey")
+	public ResponseEntity<List<DronesBattrey>>getAllBattrey() {
+		return new ResponseEntity<>(droneservice.getAllBattrey(), HttpStatus.OK);
 	}
 
 	
