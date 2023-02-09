@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.myorg.drones_api.dto.DroneStateRequest;
 import com.myorg.drones_api.dto.DronesRequest;
 import com.myorg.drones_api.entity.Drone;
 import com.myorg.drones_api.execption.DroneNotFoundException;
@@ -55,6 +56,11 @@ public class DroneController {
 	@GetMapping("/checkbattrey/{serialNumber}")
 	public ResponseEntity<String> getBattreyLevel(@PathVariable  String serialNumber) throws DroneNotFoundException {
 		return ResponseEntity.ok(droneservice.getBattreyLevel(serialNumber));
+	}
+	
+	@PutMapping("/savestate")
+	public ResponseEntity<Drone>saveState(@RequestBody @Valid DroneStateRequest droneRequest) throws DroneNotFoundException {
+		return new ResponseEntity<>(droneservice.saveState(droneRequest), HttpStatus.OK);
 	}
 
 	
