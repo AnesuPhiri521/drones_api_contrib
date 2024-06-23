@@ -2,7 +2,7 @@ package com.myorg.drones_api.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import com.myorg.drones_api.dto.MedicationRequest;
@@ -11,9 +11,9 @@ import com.myorg.drones_api.execption.MedicationNotFoundExeption;
 import com.myorg.drones_api.repository.MedicationRepository;
 
 @Service
+@RequiredArgsConstructor
 public class MedicationService {
-	@Autowired
-	private MedicationRepository medicationRepo;
+	private final MedicationRepository medicationRepo;
 	
 	public Medication saveMedication(MedicationRequest medicationRequest) {
 		Medication medication = new Medication(0,medicationRequest.getName(),medicationRequest.getWeight(),medicationRequest.getCode(),medicationRequest.getImage());
@@ -25,13 +25,9 @@ public class MedicationService {
 	}
 	
 	public Medication getSingleMedication(int id) throws MedicationNotFoundExeption {
-		Medication medication = medicationRepo.findById(id);
-		
-		if (medication!=null) {
-			return medication;
-		}else {
-			throw new MedicationNotFoundExeption("Medication with id: "+id+" is not found in system.");
-		}
+		return medicationRepo.findById(id).orElseThrow(
+				()-> new MedicationNotFoundExeption("Medication with id: "+id+" is not found in system.")
+		);
 	}
 	
 	public Medication updateMedication(Medication medicationRequest) {

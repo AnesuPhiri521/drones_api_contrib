@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.myorg.drones_api.dto.DroneStateRequest;
 import com.myorg.drones_api.dto.DronesRequest;
 import com.myorg.drones_api.entity.Drone;
-import com.myorg.drones_api.entity.DronesBattrey;
+import com.myorg.drones_api.entity.DronesBattery;
 import com.myorg.drones_api.execption.DroneNotFoundException;
 import com.myorg.drones_api.service.DroneService;
 
@@ -56,7 +56,7 @@ public class DroneController {
 	
 	@GetMapping("/checkbattrey/{serialNumber}")
 	public ResponseEntity<String> getBattreyLevel(@PathVariable  String serialNumber) throws DroneNotFoundException {
-		return ResponseEntity.ok(droneservice.getBattreyLevel(serialNumber));
+		return ResponseEntity.ok(droneservice.getBatteryLevel(serialNumber));
 	}
 	
 	@PutMapping("/savestate")
@@ -65,8 +65,8 @@ public class DroneController {
 	}
 	
 	@GetMapping("/fetchbattrey")
-	public ResponseEntity<List<DronesBattrey>>getAllBattrey() {
-		return new ResponseEntity<>(droneservice.getAllBattrey(), HttpStatus.OK);
+	public ResponseEntity<List<DronesBattery>>getAllBattrey() {
+		return new ResponseEntity<>(droneservice.getAllBattery(), HttpStatus.OK);
 	}
 
 	

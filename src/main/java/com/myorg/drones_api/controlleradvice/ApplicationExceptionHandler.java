@@ -20,15 +20,13 @@ public class ApplicationExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleInvalidArgument(MethodArgumentNotValidException ex) {
         Map<String, String> errorMap = new HashMap<>();
-        ex.getBindingResult().getFieldErrors().forEach(error -> {
-            errorMap.put(error.getField(), error.getDefaultMessage());
-        });
+        ex.getBindingResult().getFieldErrors().forEach(error -> errorMap.put(error.getField(), error.getDefaultMessage()));
         return errorMap;
     }
 	
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ExceptionHandler(DroneNotFoundException.class)
-	public Map<String, String> handleBusinessExecption(DroneNotFoundException ex){
+	public Map<String, String> handleBusinessException(DroneNotFoundException ex){
 		Map<String, String> errorMap = new HashMap<>();
 		errorMap.put("errorMessage", ex.getMessage());
 		return errorMap;
@@ -37,7 +35,7 @@ public class ApplicationExceptionHandler {
 	
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ExceptionHandler(MedicationNotFoundExeption.class)
-	public Map<String, String> handleBusinessExeption(MedicationNotFoundExeption ex){
+	public Map<String, String> handleBusinessException(MedicationNotFoundExeption ex){
 		Map<String, String> errorMap = new HashMap<>();
 		errorMap.put("errorMessage", ex.getMessage());
 		return errorMap;
@@ -46,7 +44,7 @@ public class ApplicationExceptionHandler {
 	
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(LoadingExeption.class)
-	public Map<String, String> handleLoadingExeption(LoadingExeption ex){
+	public Map<String, String> handleLoadingException(LoadingExeption ex){
 		Map<String, String> errorMap = new HashMap<>();
 		errorMap.put("errorMessage", ex.getMessage());
 		return errorMap;

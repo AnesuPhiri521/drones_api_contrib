@@ -1,18 +1,18 @@
 package com.myorg.drones_api.repository;
 
 import java.util.List;
+import java.util.Optional;
 
+import com.myorg.drones_api.utils.DroneState;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
 import com.myorg.drones_api.entity.Drone;
 
-public interface DroneRepository extends JpaRepository<Drone, Integer> {
-	Drone findById(int id);
+import javax.swing.text.html.Option;
 
-	List<Drone> findByState(String string);
+public interface DroneRepository extends JpaRepository<Drone, Integer> {
+	List<Drone> findByState(DroneState state);
 	
-	public Drone findBySerialNumber(String serialNumber);
-	
-	
+	 Optional<Drone> findBySerialNumber(String serialNumber);
 }

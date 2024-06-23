@@ -1,5 +1,10 @@
 package com.myorg.drones_api.entity;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -7,6 +12,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="medication_tbl")
+@Builder
+@ToString
+@Setter
+@Getter
 public class Medication {
 	
 	@Id
@@ -16,37 +25,6 @@ public class Medication {
 	private int weight;
 	private String code;
 	private String image;
-	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public int getWeight() {
-		return weight;
-	}
-	public void setWeight(int weight) {
-		this.weight = weight;
-	}
-	public String getCode() {
-		return code;
-	}
-	public void setCode(String code) {
-		this.code = code;
-	}
-	public String getImage() {
-		return image;
-	}
-	public void setImage(String image) {
-		this.image = image;
-	}
 	
 	public Medication(int id, String name, int weight, String code, String image) {
 		super();
@@ -60,16 +38,5 @@ public class Medication {
 	public Medication() {
 		super();
 	}
-	
-	@Override
-	public String toString() {
-		return "Medication [id=" + id + ", name=" + name + ", weight=" + weight + ", code=" + code + ", image=" + image
-				+ "]";
-	}
-	
-	
-	
-	
-	
-	
+
 }

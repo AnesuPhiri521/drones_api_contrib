@@ -1,5 +1,7 @@
 package com.myorg.drones_api.dto;
 
+import lombok.Data;
+
 import javax.persistence.Column;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -7,6 +9,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+@Data
 public class MedicationRequest {
 
 	@NotBlank(message = "Medication name should not be blank")
@@ -28,52 +31,4 @@ public class MedicationRequest {
 	@NotBlank(message = "Medication image should not be blank")
 	@NotNull(message = "Medication image should not be null")
 	private String image;
-	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public int getWeight() {
-		return weight;
-	}
-	public void setWeight(int weight) {
-		this.weight = weight;
-	}
-	public String getCode() {
-		return code;
-	}
-	public void setCode(String code) {
-		this.code = code;
-	}
-	public String getImage() {
-		return image;
-	}
-	public void setImage(String image) {
-		this.image = image;
-	}
-	
-	public MedicationRequest() {
-		super();
-	}
-	
-	public MedicationRequest(String name, int weight, String code, String image) {
-		super();
-		this.name = name;
-		this.weight = weight;
-		this.code = code;
-		this.image = image;
-	}
-	
-	@Override
-	public String toString() {
-		return "MedicationRequest [name=" + name + ", weight=" + weight + ", code=" + code + ", image=" + image + "]";
-	}
-	
-	
-	
-	
-	
-	
 }

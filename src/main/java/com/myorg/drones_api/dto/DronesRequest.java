@@ -1,5 +1,8 @@
 package com.myorg.drones_api.dto;
 
+import com.myorg.drones_api.utils.DroneState;
+import lombok.Data;
+
 import javax.persistence.Column;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -8,6 +11,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+@Data
 public class DronesRequest {
 
 	@NotBlank(message = "Serial number should not be blank")
@@ -32,56 +36,5 @@ public class DronesRequest {
 	@NotBlank(message = "Model should not be blank")
 	@NotNull(message = "Model should not be null")
 	@Pattern(regexp="^(IDLE|LOADING|LOADED|DELIVERING|DELIVERED|RETURNING)$",message="Invalid state")
-	private String state;
-	
-	public String getSerialNumber() {
-		return serialNumber;
-	}
-	public void setSerialNumber(String serialNumber) {
-		this.serialNumber = serialNumber;
-	}
-	public String getModel() {
-		return model;
-	}
-	public void setModel(String model) {
-		this.model = model;
-	}
-	public int getWeight() {
-		return weight;
-	}
-	public void setWeight(int weight) {
-		this.weight = weight;
-	}
-	public int getBattreyPercent() {
-		return battreyPercent;
-	}
-	public void setBattreyPercent(int battreyPercent) {
-		this.battreyPercent = battreyPercent;
-	}
-	public String getState() {
-		return state;
-	}
-	public void setState(String state) {
-		this.state = state;
-	}
-	
-	public DronesRequest(String serialNumber, String model, int weight, int battreyPercent, String state) {
-		super();
-		this.serialNumber = serialNumber;
-		this.model = model;
-		this.weight = weight;
-		this.battreyPercent = battreyPercent;
-		this.state = state;
-	}
-
-	public DronesRequest() {
-		super();
-	}
-	
-	@Override
-	public String toString() {
-		return "DronesRequest [serialNumber=" + serialNumber + ", model=" + model + ", weight=" + weight
-				+ ", battreyPercent=" + battreyPercent + ", state=" + state + "]";
-	}
-	
+	private DroneState state;
 }

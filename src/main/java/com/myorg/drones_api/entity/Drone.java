@@ -1,12 +1,17 @@
 package com.myorg.drones_api.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.myorg.drones_api.utils.DroneState;
+import lombok.*;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name="drones")
+@Builder
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 public class Drone {
 	@Id
 	@GeneratedValue
@@ -15,9 +20,10 @@ public class Drone {
 	private String model;
 	private int weight;
 	private int battreyPercent;
-	private String state;
+	@Enumerated(EnumType.STRING)
+	private DroneState state;
 	
-	public Drone(int id, String serialNumber, String model, int weight, int battreyPercent, String state) {
+	public Drone(int id, String serialNumber, String model, int weight, int battreyPercent, DroneState state) {
 		super();
 		this.id = id;
 		this.serialNumber = serialNumber;
@@ -26,64 +32,4 @@ public class Drone {
 		this.battreyPercent = battreyPercent;
 		this.state = state;
 	}
-	
-	public Drone() {
-		super();
-	}
-
-	
-	
-	public int getId() {
-		return id;
-	}
-
-	public String getSerialNumber() {
-		return serialNumber;
-	}
-
-	public void setSerialNumber(String serialNumber) {
-		this.serialNumber = serialNumber;
-	}
-
-	public String getModel() {
-		return model;
-	}
-
-	public void setModel(String model) {
-		this.model = model;
-	}
-
-	public int getWeight() {
-		return weight;
-	}
-
-	public void setWeight(int weight) {
-		this.weight = weight;
-	}
-
-	public int getBattreyPercent() {
-		return battreyPercent;
-	}
-
-	public void setBattreyPercent(int battreyPercent) {
-		this.battreyPercent = battreyPercent;
-	}
-
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
-
-	@Override
-	public String toString() {
-		return "Drone [id=" + id + ", serialNumber=" + serialNumber + ", model=" + model + ", weight=" + weight
-				+ ", battreyPercent=" + battreyPercent + ", state=" + state + "]";
-	}
-	
-	
-	
-	
 }
